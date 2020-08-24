@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: Users.Miner.MinerUser
+Main-Class: Users.Node.NodeUser
 Class-Path: netty-transport-native-epoll-4.1.48.Final.jar zookeeper-3.6.
  1.jar json-20200518.jar slf4j-api-1.7.25.jar zookeeper-jute-3.6.1.jar n
  etty-resolver-4.1.48.Final.jar netty-codec-4.1.48.Final.jar netty-trans
