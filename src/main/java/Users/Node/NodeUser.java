@@ -50,34 +50,35 @@ public class NodeUser {
             System.out.println("須輸入遠端節點:");
             System.out.print("\tip:\t");
             remoteHost = scanner.nextLine().strip() ;
+            // 測試連縣
+            if(SocketAction.TestConnection(remoteHost)){
+                while(true){
 
-            while(true){
-                // 測試連縣
-                if(SocketAction.TestConnection(remoteHost)){
-                    // 連線到遠端節點要取新區塊鏈
+                        // 連線到遠端節點要取新區塊鏈
 
-                     ArrayList<Block> newChain = SocketAction.Connection_to_Node(remoteHost,SocketAction.SERVER_PORT,blockchain.get_All_Blocks_JSON(),blockchain.blockchain.size());
-                    if( newChain ==null) {
-                        continue;
-                    }
-                    else{
-                        System.out.println("成功讀取區塊鏈");
+                         ArrayList<Block> newChain = SocketAction.Connection_to_Node(remoteHost,SocketAction.SERVER_PORT,blockchain.get_All_Blocks_JSON(),blockchain.blockchain.size());
+                        if( newChain ==null) {
+                            timer = UserFunctions.SetTimer(remoteHost,timer,blockchain.get_All_Blocks_JSON(),0);
+                            break;
+                        }
+                        else{
+                            System.out.println("成功讀取區塊鏈");
 
-                        blockchain.blockchain = newChain;
-                        // 更改 buffer block previous hash
-                        bufferChain.get(0).previous_hash=blockchain.blockchain.get(blockchain.blockchain.size()-1).hash;
+                            blockchain.blockchain = newChain;
+                            // 更改 buffer block previous hash
+                            System.out.println(newChain);
+                            bufferChain.add(MakeEmptyBlock(blockchain.blockchain.get(blockchain.blockchain.size()-1).hash,newChain.size()));
+                            // 設定 master
+                            master=InetAddress.getByName(remoteHost);
+                            // 設定 新排成
+                            timer = UserFunctions.SetTimer(remoteHost,timer,newChain.toString(),newChain.size());
 
-                        // 設定 master
-                        master=InetAddress.getByName(remoteHost);
-                        // 設定 新排成
-                        timer = UserFunctions.SetTimer(remoteHost,timer,newChain.toString(),newChain.size());
-
-                        break;
-                    }
+                            break;
+                        }
                 }
-                else
-                    System.exit(-15);
             }
+            else
+                System.exit(-15);
         }
 
         System.out.println("輸入節點:");
