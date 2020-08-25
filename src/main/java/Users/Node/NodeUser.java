@@ -282,7 +282,8 @@ public class NodeUser {
                         }
 
                         else if(cmd.equals("get-blockchain")){
-                            System.out.println("\t要求區塊鏈\t");
+                            System.out.println("\t下載區塊鏈\t");
+                            Thread.sleep(100);
                             SocketAction.SocketWrite(blockchain.get_All_Blocks_JSON(), clientSocket);
                             Thread.sleep(100);
                         }
