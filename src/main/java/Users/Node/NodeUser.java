@@ -67,7 +67,6 @@ public class NodeUser {
 
                             blockchain.blockchain = newChain;
                             // 更改 buffer block previous hash
-                            System.out.println(newChain);
                             bufferChain.add(MakeEmptyBlock(blockchain.blockchain.get(blockchain.blockchain.size()-1).hash,newChain.size()));
                             // 設定 master
                             master=InetAddress.getByName(remoteHost);
@@ -77,7 +76,7 @@ public class NodeUser {
                             break;
                         }
                 }
-                UserFunctions.CancelTimer(timer);
+              //  UserFunctions.CancelTimer(timer);
             }
             else
                 System.exit(-15);
