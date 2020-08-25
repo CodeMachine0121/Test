@@ -84,30 +84,6 @@ public class UserFunctions {
     }
 
 
-    // For Node users
-    public static Timer SetTimer(String remoteHost, Timer timer, String strBlockchain, int chainSize){
-
-        System.out.println("*********設定排程********");
-        TimerTask askChain = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    SocketAction.Connection_to_Node(remoteHost,SocketAction.SERVER_PORT, strBlockchain, chainSize);
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        timer.schedule(askChain, 10000, 30000);// 1秒後開始，之後每過30秒再執行
-        return timer;
-    }
-
-
-
-    public static void CancelTimer(Timer timer){
-        System.out.println("*********取消排程********");
-        timer.cancel();
-    }
 
 
     // All user used
