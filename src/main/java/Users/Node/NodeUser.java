@@ -20,6 +20,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
+import java.sql.Time;
 import java.util.*;
 
 
@@ -56,9 +57,9 @@ public class NodeUser {
 
                         // 連線到遠端節點要取新區塊鏈
 
-                         ArrayList<Block> newChain = SocketAction.Connection_to_Node(remoteHost,SocketAction.SERVER_PORT,blockchain.get_All_Blocks_JSON(),blockchain.blockchain.size());
+                        ArrayList<Block> newChain = SocketAction.Connection_to_Node(remoteHost,SocketAction.SERVER_PORT,blockchain.get_All_Blocks_JSON(),blockchain.blockchain.size());
                         if( newChain ==null) {
-                            timer = UserFunctions.SetTimer(remoteHost,timer,blockchain.get_All_Blocks_JSON(),0);
+                            timer = Update_Timer_Blockchain(blockchain.get_All_Blocks_JSON(),timer,0);
                             break;
                         }
                         else{
@@ -76,9 +77,11 @@ public class NodeUser {
                             break;
                         }
                 }
+                UserFunctions.CancelTimer(timer);
             }
             else
                 System.exit(-15);
+
         }
 
         System.out.println("輸入節點:");
@@ -106,7 +109,7 @@ public class NodeUser {
 
 
         while(true) {
-
+            timer = Update_Timer_Blockchain(blockchain.get_All_Blocks_JSON(),timer,0);
             final Socket clientSocket=socket.accept();
 
             if(bufferChain.size()==0){
@@ -372,5 +375,7 @@ public class NodeUser {
         return balance;
     }
 
-
+    private static Timer Update_Timer_Blockchain(String strBlockchain, Timer timer, int chainSize){
+        return UserFunctions.SetTimer(remoteHost,timer,strBlockchain,chainSize);
+    }
 }

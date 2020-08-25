@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="custom_blockchain" />
         <module name="Custom_Blockchain" />
+        <module name="custom_blockchain" />
         <module name="customchain" />
+        <module name="test" />
       </profile>
     </annotationProcessing>
   </component>
