@@ -109,7 +109,6 @@ public class NodeUser {
 
 
         while(true) {
-            timer = Update_Timer_Blockchain(blockchain.get_All_Blocks_JSON(),timer,0);
             final Socket clientSocket=socket.accept();
 
             if(bufferChain.size()==0){
@@ -248,7 +247,7 @@ public class NodeUser {
 
                                 // 設定排程 固定跟client要求區塊鏈
                                 System.out.println("變更主節點: "+clientSocket.getInetAddress());
-                                timer = UserFunctions.SetTimer(remoteHost,timer,strBlockchain,client_blockSize);
+                                timer = Update_Timer_Blockchain(strBlockchain,timer,clientBlockchain_Size);
 
 
                                 // 確定此時有無 主節點存在
