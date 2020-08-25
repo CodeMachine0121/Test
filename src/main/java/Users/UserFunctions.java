@@ -144,17 +144,17 @@ public class UserFunctions {
         JSONObject jsonBlockchain = new JSONObject(strBlockchain).getJSONObject("Blockchain");
 
         for(int i=0;i<chainSize;i++){
-            printOutBlock(jsonBlockchain.getJSONObject("Block-"+i).toString()+",");
+            printOutBlock(jsonBlockchain.toString(),i);
 
         }
         System.out.println();
 
     }
-    public  static void printOutBlock(String strBlock){
+    public  static void printOutBlock(String strBlock,int blockNumber){
 
-        JSONObject jsonBlock = new JSONObject(strBlock);
+        JSONObject jsonBlock = new JSONObject(strBlock).getJSONObject("Block-"+blockNumber);
 
-        System.out.println("\t{Block-"+jsonBlock.getInt("No"));
+        System.out.println("\t{Block-"+blockNumber);
 
         System.out.println("\t\tHash:"+jsonBlock.getString("hash"));
         System.out.println("\t\tPrevious Hash:"+jsonBlock.getString("previous hash"));

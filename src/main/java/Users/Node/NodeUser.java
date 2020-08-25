@@ -138,7 +138,7 @@ public class NodeUser {
 
                             Block new_block = UserFunctions.Convert2Block(jblock, BlockNo);
                             System.out.println("新區塊: " );
-                            UserFunctions.printOutBlock(jblock);
+                            UserFunctions.printOutBlock(jblock,BlockNo);
 
 
                             // recieve difficulty
@@ -283,9 +283,9 @@ public class NodeUser {
 
                         else if(cmd.equals("get-blockchain")){
                             System.out.println("\t下載區塊鏈\t");
-                            Thread.sleep(100);
                             SocketAction.SocketWrite(blockchain.get_All_Blocks_JSON(), clientSocket);
                             Thread.sleep(100);
+                            SocketAction.SocketWrite(String.valueOf(BlockNo),clientSocket);
                         }
                         else if(cmd.equals("test")){
                             System.out.println("\t測試連線\t");

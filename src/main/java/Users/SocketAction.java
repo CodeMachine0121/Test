@@ -139,7 +139,7 @@ public class SocketAction {
                     // convert to block obj
                     block = UserFunctions.Convert2Block(strBlock, blockNumber);
                     // print out block
-                    UserFunctions.printOutBlock(new JSONObject(strBlock).getJSONObject("Block-"+blockNumber).toString());
+                    UserFunctions.printOutBlock(strBlock,blockNumber);
                 }catch (Exception e){
                    e.printStackTrace();
                 }
@@ -197,7 +197,7 @@ public class SocketAction {
         Thread.sleep(TIME_DELAY);
         System.out.println("新區塊: ");
 
-        UserFunctions.printOutBlock(new JSONObject(block.get_Block_to_Json(blockNumber)).getJSONObject("Block-"+blockNumber).toString());
+        UserFunctions.printOutBlock(block.get_Block_to_Json(blockNumber),blockNumber);
 
 
         // calculate and send the difficulty
@@ -219,9 +219,6 @@ public class SocketAction {
             System.out.println("區塊提交錯誤, 請重新與節點要求區塊在進行計算");
         }else if ("yes".equals(result)){
             System.out.println("成功發布");
-        }else{
-            System.out.println(result);
-            System.out.println("不明錯誤, 請重新與節點要求區塊在進行計算");
         }
 
     }
